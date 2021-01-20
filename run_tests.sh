@@ -1,0 +1,1 @@
+vctl status
