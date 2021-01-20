@@ -4,7 +4,9 @@ on:
   pull_request:
     branches:
       - main
-
+  push:
+    branches:
+      - add-docker-image-test-scripts
 jobs:
   build:
     # The strategy allows customization of the build and allows matrixing the version of os and software
