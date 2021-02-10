@@ -1,31 +1,8 @@
 #!/usr/bin/env bash
-# install jq for testing
+
+# jq needed to parse standardout for testing
 sudo apt-get install jq -y
 start=$(date +%s)
-
-
-exit_cleanly() {
-  if [ "${skip_build}" != true ]; then
-    echo "Removing image: ${image_name}..."
-    docker rmi --force ${image_name}
-  fi
-  exit
-}
-
-
-exit_test() {
-  echo -e $1
-  docker logs --tail 25 volttron1
-  docker-compose down
-  exit_cleanly
-}
-
-check_error_code() {
-  local code=$1
-  if [ "${code}" -ne 0 ]; then
-    exit_test $2
-  fi
-}
 
 # Optional parameters; defaults provided for each one
 skip_build='' # skip building the image
@@ -46,6 +23,29 @@ done
 # Set image_name to be used in calls to docker
 image_name="volttron/${group}:${tag}"
 echo "Test running with following optional parameters: skip_build: ${skip_build}; wait: ${wait}; group: ${group}; tag: ${tag}"
+
+exit_cleanly() {
+  docker-compose down
+  if [ "${skip_build}" != true ]; then
+    echo "Removing image: ${image_name}..."
+    docker rmi --force ${image_name}
+  fi
+  exit
+}
+
+exit_test() {
+  echo -e $1
+  docker logs --tail 25 volttron1
+  exit_cleanly
+}
+
+check_error_code() {
+  local code=$1
+  if [ "${code}" -ne 0 ]; then
+    exit_test $2
+  fi
+}
+
 
 ############ Build image
 if [ "${skip_build}" = true ]; then
