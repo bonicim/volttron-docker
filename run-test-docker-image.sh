@@ -5,6 +5,7 @@ start=$(date +%s)
 
 
 exit_cleanly() {
+  docker-compose down
   if [ "${skip_build}" != true ]; then
     echo "Removing image: ${image_name}..."
     docker rmi --force ${image_name}
@@ -16,7 +17,6 @@ exit_cleanly() {
 exit_test() {
   echo -e $1
   docker logs --tail 25 volttron1
-  docker-compose down
   exit_cleanly
 }
 
