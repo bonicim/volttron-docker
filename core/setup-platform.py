@@ -50,13 +50,13 @@ bind_web_address = platform_cfg.get("bind-web-address", None)
 # if bind_web_address is not None:
 #     print(f"Platform bind web address set to: {bind_web_address}")
 
-from requirements import extras_require as extras
-web_plt_pack = extras.get("web", None)
-install_cmd = ["pip3", "install"]
-install_cmd.extend(web_plt_pack)
-if install_cmd is not None:
-    print(f"Installing packages for web platform: {web_plt_pack}")
-    subprocess.check_call(install_cmd)
+# from requirements import extras_require as extras
+# web_plt_pack = extras.get("web", None)
+# install_cmd = ["pip3", "install"]
+# install_cmd.extend(web_plt_pack)
+# if install_cmd is not None:
+#     print(f"Installing packages for web platform: {web_plt_pack}")
+#     subprocess.check_call(install_cmd)
 
 envcpy = os.environ.copy()
 
