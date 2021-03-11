@@ -1,0 +1,19 @@
+version: '3.5'
+
+services:
+  volttron1:
+    container_name: intellemation
+    image: intellemation:latest
+    ports:
+      # host_port:container_port
+      # ssl port for web
+      - 8443:8443
+      # port for VIP-address
+      - 22916:22916
+    volumes:
+      - ./configs:/home/volttron/configs
+      - ./platform_config_intellemation.yml:/platform_config.yml
+    environment:
+      - CONFIG=/home/volttron/configs
+      - LOCAL_USER_ID=1000
+      - MESSAGE_BUS=zmq

@@ -238,7 +238,7 @@ if need_to_install:
                 subprocess.check_call(entry_cmd)
 
 
-    subprocess.call(["vctl", "auth", "add", "--credentials", '/.*/'])
+    # subprocess.call(["vctl", "auth", "add", "--credentials", '/.*/'])
 
     # Stop running volttron now that it is setup.
     sys.stdout.write("\n**************************************************\n")
