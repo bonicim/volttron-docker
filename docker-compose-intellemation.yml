@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   intellemation:
-    container_name: intellemation
+#    container_name: intellemation
     image: intellemation:latest
     ports:
       # host_port:container_port
