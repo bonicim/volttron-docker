@@ -18,8 +18,10 @@ done
 
 for i in "${containerlist[@]}"
 do
-	docker exec -u volttron "${i}" /home/volttron/.local/bin/volttron -vv -l volt.log &
-  echo "${agentlist[@]}" | xargs -n1 docker exec -u volttron "${i}" /home/volttron/.local/bin/vctl restart
-  docker exec -u volttron "${i}" /home/volttron/.local/bin/vctl status
+  docker exec -u volttron "${i}" /home/volttron/.local/bin/volttron -vv -l volt.log &
 done
 
+for i in "${containerlist[@]}"
+do
+  echo "${agentlist[@]}" | xargs -n1 docker exec -u volttron "${i}" /home/volttron/.local/bin/vctl restart
+done
