@@ -22,6 +22,7 @@ VOLTTRON_CTL_CMD = "volttron-ctl"
 VOLTTRON_CFG_CMD = "vcfg"
 INSTALL_PATH = "{}/scripts/install-agent.py".format(VOLTTRON_ROOT)
 KEYSTORES = os.path.join(VOLTTRON_HOME, "keystores")
+INSTANCE_NAME = os.environ['INSTANCE_NAME']
 
 if not VOLTTRON_HOME:
     VOLTTRON_HOME = "/home/volttron/.volttron"
@@ -44,7 +45,8 @@ with open(platform_config) as cin:
     agents = config['agents']
     platform_cfg = config['config']
 
-print("Platform instance name set to: {}".format(platform_cfg.get('instance-name')))
+# print("Platform instance name set to: {}".format(platform_cfg.get('instance-name')))
+print("Platform instance name set to: {}".format(INSTANCE_NAME))
 
 bind_web_address = platform_cfg.get("bind-web-address", None)
 # if bind_web_address is not None:
@@ -81,7 +83,7 @@ if platform_cfg.get('message-bus') == 'rmq':
         "L": "Richmond",
         "O": "PNNL",
         "OU": "Volttron",
-        "CN": f"{platform_cfg.get('instance-name')}-root-ca",
+        "CN": f"{INSTANCE_NAME}-root-ca",
     }
     crts.create_root_ca(overwrite=False, **data)
     copy(crts.cert_file(crts.root_ca_name), crts.cert_file(crts.trusted_ca_name))
@@ -97,13 +99,13 @@ if platform_cfg.get('message-bus') == 'rmq':
         root_ca_name,
         server_name,
         admin_client_name,
-    ) = certs.Certs.get_admin_cert_names(platform_cfg.get("instance-name"))
+    ) = certs.Certs.get_admin_cert_names(INSTANCE_NAME)
     crts.create_signed_cert_files(
         server_name, cert_type="server", fqdn=get_hostname()
     )
     crts.create_signed_cert_files(admin_client_name, cert_type="client")
 
-    name = f"{platform_cfg.get('instance-name')}.{PLATFORM_WEB}"
+    name = f"{INSTANCE_NAME}.{PLATFORM_WEB}"
     master_web_cert = os.path.join(VOLTTRON_HOME, 'certificates/certs/',
                                    name + "-server.crt")
     master_web_key = os.path.join(VOLTTRON_HOME, 'certificates/private/',
@@ -140,7 +142,7 @@ if platform_cfg.get('message-bus') == 'rmq':
 
     rabbit_config['host'] = hostname
     certs_test_path = os.path.join(VOLTTRON_HOME,
-                                   "certificates/certs/{}-trusted-cas.crt".format(platform_cfg.get("instance-name")))
+                                   "certificates/certs/{}-trusted-cas.crt".format(INSTANCE_NAME))
     if os.path.isfile(certs_test_path):
         rabbit_config['use-existing-certs'] = True
 
@@ -158,7 +160,7 @@ if platform_cfg.get('message-bus') == 'rmq':
     now_dir = os.getcwd()
     os.chdir(VOLTTRON_ROOT)
 
-    setup_rabbitmq_volttron('single', True, instance_name=platform_cfg.get('instance-name'))
+    setup_rabbitmq_volttron('single', True, instance_name=INSTANCE_NAME)
     os.chdir(now_dir)
 
 
