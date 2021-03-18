@@ -73,7 +73,7 @@ if not os.path.exists(cfg_path):
             fout.write("[volttron]\n")
             for key, value in platform_cfg.items():
                 fout.write("{}={}\n".format(key.strip(), value.strip()))
-
+            fout.write("{}={}\n".format('instance-name', INSTANCE_NAME))
 if platform_cfg.get('message-bus') == 'rmq':
     print("Creating CA Certificate...")
     crts = certs.Certs()
