@@ -7,7 +7,7 @@ services:
     ports:
       # host_port:container_port
       # ssl port for web
-      - 8443:8443
+      - 8441:8443
       # port for VIP-address
       - 22911:22916
     volumes:
@@ -25,7 +25,7 @@ services:
       ports:
         # host_port:container_port
         # ssl port for web
-        - 8443:8443
+        - 8442:8443
         # port for VIP-address
         - 22912:22916
       volumes:
