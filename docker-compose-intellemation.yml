@@ -1,9 +1,9 @@
 version: '3.5'
 
 services:
-  fwd1:
+  intellimation:
 #    container_name: fwd1
-    image: intellemation:latest
+    image: intellimation:latest
 #    ports:
 #      # host_port:container_port
 #      # ssl port for web
