@@ -2,14 +2,14 @@ version: '3.5'
 
 services:
   fwd1:
-    container_name: fwd1
+#    container_name: fwd1
     image: intellemation:latest
-    ports:
-      # host_port:container_port
-      # ssl port for web
-      - 8441:8443
-      # port for VIP-address
-      - 22911:22916
+#    ports:
+#      # host_port:container_port
+#      # ssl port for web
+#      - 8441:8443
+#      # port for VIP-address
+#      - 22911:22916
     volumes:
       - ./configs:/home/volttron/configs
       - ./platform_config_intellemation.yml:/platform_config.yml
@@ -17,22 +17,22 @@ services:
       - CONFIG=/home/volttron/configs
       - LOCAL_USER_ID=1000
       - MESSAGE_BUS=zmq
-      - INSTANCE_NAME=fwd1
+#      - INSTANCE_NAME=fwd1
 
-  fwd2:
-      container_name: fwd2
-      image: intellemation:latest
-      ports:
-        # host_port:container_port
-        # ssl port for web
-        - 8442:8443
-        # port for VIP-address
-        - 22912:22916
-      volumes:
-        - ./configs:/home/volttron/configs
-        - ./platform_config_intellemation.yml:/platform_config.yml
-      environment:
-        - CONFIG=/home/volttron/configs
-        - LOCAL_USER_ID=1000
-        - MESSAGE_BUS=zmq
-        - INSTANCE_NAME=fwd2
+#  fwd2:
+#      container_name: fwd2
+#      image: intellemation:latest
+#      ports:
+#        # host_port:container_port
+#        # ssl port for web
+#        - 8442:8443
+#        # port for VIP-address
+#        - 22912:22916
+#      volumes:
+#        - ./configs:/home/volttron/configs
+#        - ./platform_config_intellemation.yml:/platform_config.yml
+#      environment:
+#        - CONFIG=/home/volttron/configs
+#        - LOCAL_USER_ID=1000
+#        - MESSAGE_BUS=zmq
+#        - INSTANCE_NAME=fwd2
