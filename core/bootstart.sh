@@ -21,7 +21,8 @@ echo "Setup of Volttron platform is complete."
 echo "Starting Volttron..."
 
 # Now spin up the volttron platform
-volttron -vv
+volttron -vv --log-config /code/volttron/examples/rotatinglog.py 
+
 volttron_retcode=$?
 if [[ $volttron_retcode ]]; then
   echo "volttron error"

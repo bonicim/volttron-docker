@@ -170,10 +170,10 @@ print("Available agents that are needing to be setup/installed")
 print(agents)
 
 # TODO Fix so that the agents identities are consulted.
-for identity, specs in agents.items():
-    path_to_keystore = os.path.join(KEYSTORES, identity)
-    if not os.path.exists(path_to_keystore):
-        need_to_install[identity] = specs
+#for identity, specs in agents.items():
+ #   path_to_keystore = os.path.join(KEYSTORES, identity)
+  #  if not os.path.exists(path_to_keystore):
+   #     need_to_install[identity] = specs
 
 # if we need to do installs then we haven't setup this at all.
 if need_to_install:
